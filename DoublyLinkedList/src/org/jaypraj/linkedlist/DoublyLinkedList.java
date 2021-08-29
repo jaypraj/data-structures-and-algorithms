@@ -8,31 +8,47 @@ public class DoublyLinkedList<T> implements Iterable<T> {
     private Node<T> head = null;
     private Node<T> tail = null;
 
-    private class Node<T> {
-        T data;
-        Node<T> previous;
-        Node<T> next;
+    private static class Node<T> {
+        private T data;
+        private Node<T> previous;
+        private Node<T> next;
 
         public Node(T data, Node<T> previous, Node<T> next) {
             this.data = data;
             this.previous = previous;
             this.next = next;
         }
+
+        @Override
+        public String toString() {
+            return data.toString();
+        }
     }
 
+    /**
+     * Returns the size of the list
+     * @return int size
+     */
     public int size() {
         return size;
     }
 
+    /**
+     * Checks whether the list is empty
+     * @return true if the list is empty, else false
+     */
     public boolean isEmpty() {
         return size() == 0;
     }
 
+    /**
+     * Remove all elements from the list
+     */
     public void clear() {
         if (isEmpty()) throw new RuntimeException("Linked List is empty");
 
         Node<T> traversal = head;
-        while (traversal.next != null) {
+        while (traversal != null) {
             Node<T> next = traversal.next;
             traversal.data = null;
             traversal.previous = null;
@@ -44,17 +60,46 @@ public class DoublyLinkedList<T> implements Iterable<T> {
         size = 0;
     }
 
-    public boolean contains(T element) {
-        if (isEmpty()) throw new RuntimeException("Linked list is empty");
+    /**
+     * Get the index of the element
+     * @param element
+     * @return int index
+     */
+    public int indexOf(T element) {
+        if (isEmpty()) throw new RuntimeException("Empty list");
 
+        int i = 0;
         Node<T> traversal = head;
-        while (traversal != null) {
-            if (traversal.data.equals(element)) return true;
-            traversal = traversal.next;
+        if (element == null) {
+            for (; traversal != null; i++, traversal = traversal.next) {
+                if (traversal.data == null) {
+                    return i;
+                }
+            }
+        } else {
+            for (; traversal != null; i++, traversal = traversal.next) {
+                if (element.equals(traversal.data)) {
+                    return i;
+                }
+            }
         }
-        return false;
+
+        return -1;
     }
 
+    /**
+     * Checks whether the list contains the element
+     * @param element
+     * @return
+     */
+    public boolean contains(T element) {
+        return indexOf(element) != -1;
+    }
+
+    /**
+     * Adds an element to the start of the list
+     * @param element
+     */
     public void insertFirst(T element) {
         if (isEmpty()) {
             Node<T> newNode = new Node<>(element, null, null);
@@ -67,6 +112,10 @@ public class DoublyLinkedList<T> implements Iterable<T> {
         size++;
     }
 
+    /**
+     * Adds an element at the end of the list
+     * @param element
+     */
     public void insertLast(T element) {
         if (isEmpty()) {
             Node<T> newNode = new Node<>(element, null, null);
@@ -79,61 +128,102 @@ public class DoublyLinkedList<T> implements Iterable<T> {
         size++;
     }
 
+    /**
+     * Adds an element at the end of the list
+     * @param element
+     */
     public void insert(T element) {
         insertLast(element);
     }
 
+    /**
+     * Adds an element at the specific index
+     * @param index at which the element needs to be added
+     * @param element which needs to be added
+     */
     public void insertAt(int index, T element) {
-        if (index < 0 || index >= size) throw new IndexOutOfBoundsException(index);
+        if (index < 0 || index > size) throw new IndexOutOfBoundsException(index);
         else if (index == 0) insertFirst(element);
-        else if (index == size - 1) insertLast(element);
+        else if (index == size) insertLast(element);
         else {
+            Node<T> traversal;
             if (index < size / 2) {
-                Node<T> traversal = head;
+                traversal = head;
 
                 for (int i = 0; i < index; i++) {
                     traversal = traversal.next;
                 }
-
-                Node<T> newNode = new Node<>(element, traversal.previous, traversal);
-                traversal.previous.next = newNode;
-                traversal.previous = newNode;
             } else {
-                Node<T> traversal = tail;
+                traversal = tail;
 
                 for (int i = size - 1; i > index; i--) {
                     traversal = traversal.previous;
                 }
-                Node<T> newNode = new Node<>(element, traversal.previous, traversal);
-                traversal.previous.next = newNode;
-                traversal.previous = newNode;
             }
+            Node<T> newNode = new Node<>(element, traversal.previous, traversal);
+            traversal.previous.next = newNode;
+            traversal.previous = newNode;
+
             size++;
         }
     }
 
+    /**
+     * Removes the node from the list
+     * @param node which needs to be removed
+     * @return data of the removed node
+     */
+    private T remove(Node<T> node) {
+        if (node.previous == null) return removeFirst();
+        else if (node.next == null) return removeLast();
+        else {
+            node.next.previous = node.previous;
+            node.previous.next = node.next;
+
+            T data = node.data;
+            node.data = null;
+            node.previous = null;
+            node.next = null;
+            size--;
+
+            return data;
+        }
+    }
+
+    /**
+     * Removes node that contains the element from the list
+     * @param element which needs to be removed
+     * @return true if the element successfully removed, else false
+     */
     public boolean remove(T element) {
         if (isEmpty()) throw new RuntimeException("Linked List is empty");
 
-        Node<T> traversal = head;
+        Node<T> traversal;
 
-        while (traversal.next != null) {
-            traversal = traversal.next;
-
-            if (traversal.data.equals(element)) {
-                traversal.previous.next = traversal.next;
-                traversal.next.previous = traversal.previous;
-                traversal.data = null;
-                traversal.previous = null;
-                traversal.next = null;
-                size--;
-                return true;
+        if (element == null) {
+            for (traversal = head; traversal != null; traversal = traversal.next) {
+                if (traversal.data == null) {
+                    remove(traversal);
+                    return true;
+                }
+            }
+        } else {
+            for (traversal = head; traversal != null; traversal = traversal.next) {
+                if (element.equals(traversal.data)) {
+                    remove(traversal);
+                    return true;
+                }
             }
         }
 
         return false;
     }
 
+    /**
+     * Removes the element from specified index
+     * @param index from which the element needs to be removed
+     * @return data of the removed element
+     */
     public T removeAt(int index) {
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException(index);
         else if (index == 0) return removeFirst();
@@ -154,36 +244,46 @@ public class DoublyLinkedList<T> implements Iterable<T> {
                 }
             }
 
-            T data = traversal.data;
-            traversal.next.previous = traversal.previous;
-            traversal.previous.next = traversal.next;
-            traversal.data = null;
-            traversal.previous = null;
-            traversal.next = null;
-            size--;
-
-            return data;
+            return remove(traversal);
         }
     }
 
+    /**
+     * Removes the first node from the list
+     * @return the removed node
+     */
     public T removeFirst() {
         if (isEmpty()) throw new RuntimeException("Linked List is empty");
 
         T data = head.data;
-        head.next.previous = null;
         head = head.next;
         size--;
+
+        if (isEmpty()) {
+            tail = null;
+        } else {
+            head.previous = null;
+        }
 
         return data;
     }
 
+    /**
+     * Removes the last node from the list
+     * @return the last node
+     */
     public T removeLast() {
         if (isEmpty()) throw new RuntimeException("Linked List is empty");
 
         T data = tail.data;
-        tail.previous.next = null;
         tail = tail.previous;
         size--;
+
+        if (isEmpty()) {
+            head = null;
+        } else {
+            tail.next = null;
+        }
 
         return data;
     }
@@ -191,16 +291,23 @@ public class DoublyLinkedList<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<>() {
-            Node<T> traversal = head;
+            private Node<T> traversal = head;
 
             @Override
             public boolean hasNext() {
-                return traversal.next != null;
+                return traversal != null;
             }
 
             @Override
             public T next() {
-                return traversal.next.data;
+                T data = traversal.data;
+                traversal = traversal.next;
+                return data;
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException();
             }
         };
     }
