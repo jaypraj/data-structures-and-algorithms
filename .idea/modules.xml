@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/DoublyLinkedList/DoublyLinkedList.iml" filepath="$PROJECT_DIR$/DoublyLinkedList/DoublyLinkedList.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DynamicArray/DynamicArray.iml" filepath="$PROJECT_DIR$/DynamicArray/DynamicArray.iml" />
       <module fileurl="file://$PROJECT_DIR$/data-structures.iml" filepath="$PROJECT_DIR$/data-structures.iml" />
     </modules>
   </component>
