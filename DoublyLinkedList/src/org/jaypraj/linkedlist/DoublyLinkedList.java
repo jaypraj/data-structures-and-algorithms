@@ -62,8 +62,8 @@ public class DoublyLinkedList<T> implements Iterable<T> {
 
     /**
      * Get the index of the element
-     * @param element
-     * @return int index
+     * @param element element of which index to be returned
+     * @return the index of the element
      */
     public int indexOf(T element) {
         if (isEmpty()) throw new RuntimeException("Empty list");
@@ -89,8 +89,8 @@ public class DoublyLinkedList<T> implements Iterable<T> {
 
     /**
      * Checks whether the list contains the element
-     * @param element
-     * @return
+     * @param element to be checked whether it's in the list
+     * @return true if the element is present, else false
      */
     public boolean contains(T element) {
         return indexOf(element) != -1;
@@ -98,7 +98,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
 
     /**
      * Adds an element to the start of the list
-     * @param element
+     * @param element element to be inserted at the front of list
      */
     public void insertFirst(T element) {
         if (isEmpty()) {
@@ -114,7 +114,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
 
     /**
      * Adds an element at the end of the list
-     * @param element
+     * @param element element to be inserted at the end of the list
      */
     public void insertLast(T element) {
         if (isEmpty()) {
@@ -130,7 +130,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
 
     /**
      * Adds an element at the end of the list
-     * @param element
+     * @param element element to be inserted
      */
     public void insert(T element) {
         insertLast(element);
@@ -286,6 +286,26 @@ public class DoublyLinkedList<T> implements Iterable<T> {
         }
 
         return data;
+    }
+
+    /**
+     * Returns the first element without removing it
+     * @return the first element
+     */
+    public T peekFirst() {
+        Node<T> f = head;
+
+        return (f == null) ? null : f.data;
+    }
+
+    /**
+     * Returns the last element without removing it
+     * @return the last element
+     */
+    public T peekLast() {
+        Node<T> l = tail;
+
+        return (l == null)  ? null : l.data;
     }
 
     @Override
