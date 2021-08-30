@@ -6,7 +6,7 @@ import java.util.Iterator;
 public class Array<T> implements Iterable<T> {
     private T[] arr;
     private int len = 0;
-    private int capacity = 0;
+    private int capacity;
 
     public Array() {
         this(16);
@@ -111,8 +111,9 @@ public class Array<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new Iterator<>() {
             int index = 0;
+
             @Override
             public boolean hasNext() {
                 return index < len;
