@@ -1,8 +1,8 @@
-package org.jaypraj.datastructures;
+package org.jaypraj.stack;
 
 public class StackTest {
     public static void main(String[] args) {
-        Stack<Integer> stack = new Stack<>();
+        org.jaypraj.stack.Stack<Integer> stack = new org.jaypraj.stack.Stack<>();
 
         System.out.println(stack.isEmpty());
         System.out.println(stack.size());

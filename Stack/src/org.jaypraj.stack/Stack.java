@@ -1,4 +1,4 @@
-package org.jaypraj.datastructures;
+package org.jaypraj.stack;
 
 import java.util.EmptyStackException;
 import java.util.Iterator;
