@@ -1,4 +1,4 @@
-package org.jaypraj.linkedlist;
+package org.jaypraj.datastructures.linkedlist;
 
 public class DoublyLinkedListTest {
     public static void main(String[] args) {

@@ -1,6 +1,5 @@
-package org.jaypraj.dynamicarray;
+package org.jaypraj.datastructures.dynamicarray;
 
-import java.nio.channels.InterruptibleChannel;
 import java.util.Iterator;
 
 public class DynamicArrayTest {

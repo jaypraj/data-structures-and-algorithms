@@ -1,4 +1,4 @@
-package org.jaypraj.queue;
+package org.jaypraj.datastructures.queue;
 
 public class LinkedQueueTest {
     public static void main(String[] args) {

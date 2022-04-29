@@ -1,4 +1,4 @@
-package org.jaypraj.dynamicarray;
+package org.jaypraj.datastructures.dynamicarray;
 
 import java.util.Iterator;
 

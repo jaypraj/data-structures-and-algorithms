@@ -1,4 +1,4 @@
-package org.jaypraj.queue;
+package org.jaypraj.datastructures.queue;
 
 public class LinkedPriorityQueue<E> {
 

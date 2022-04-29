@@ -1,4 +1,4 @@
-package org.jaypraj.linkedlist;
+package org.jaypraj.datastructures.linkedlist;
 
 import java.util.Iterator;
 

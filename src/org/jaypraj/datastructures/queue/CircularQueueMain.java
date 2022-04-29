@@ -1,4 +1,4 @@
-package org.jaypraj.queue;
+package org.jaypraj.datastructures.queue;
 
 class MyCircularQueue {
 
