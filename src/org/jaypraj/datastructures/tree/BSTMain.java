@@ -4,14 +4,14 @@ public class BSTMain {
   public static void main(String[] args) {
     BinarySearchTree tree = new BinarySearchTree();
 
-    tree.insert(3);
-    tree.insert(1);
-    tree.insert(5);
-    tree.insert(0);
-    tree.insert(2);
-    tree.insert(4);
-    tree.insert(6);
-    //    tree.insert(7);
+    tree.insertRecursively(3);
+    tree.insertRecursively(1);
+    tree.insertRecursively(5);
+    tree.insertRecursively(0);
+    tree.insertRecursively(2);
+    tree.insertRecursively(4);
+    tree.insertRecursively(6);
+    tree.insertRecursively(7);
 
     tree.inOrderTraverse();
     System.out.println();
@@ -20,7 +20,7 @@ public class BSTMain {
     tree.postOrderTraverse();
     System.out.println();
 
-    System.out.println(tree.delete(-1));
+    System.out.println(tree.delete(6));
 
     tree.inOrderTraverse();
     System.out.println();
@@ -29,7 +29,7 @@ public class BSTMain {
     tree.postOrderTraverse();
     System.out.println();
 
-    System.out.println(tree.search(-1));
+    System.out.println(tree.search(6));
 
     //    System.out.println(tree.search(5));
     //    System.out.println(tree.search(-1));

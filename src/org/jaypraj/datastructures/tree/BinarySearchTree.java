@@ -57,6 +57,16 @@ public class BinarySearchTree {
   }
 
   /**
+   * Inserts a new node with given data at appropriate position in the tree
+   * recursively
+   *
+   * @param data to be inserted
+   */
+  public void insertRecursively(int data) {
+    this.root = insertRecursively(this.root, data);
+  }
+
+  /**
    * Inserts a node with given data at appropriate position in the tree starting
    * from the node root using iteration
    *
@@ -89,6 +99,28 @@ public class BinarySearchTree {
       currentNode.right = newNode;
       newNode.parent = currentNode;
     }
+  }
+
+  /**
+   * Insert new node recursively
+   *
+   * @param root root node of the tree
+   * @param data value to be inserted in the tree
+   * @return returns the root node of the tree after inserting the new node
+   */
+  private TreeNode insertRecursively(TreeNode root, int data) {
+    if (root == null) {
+      root = new TreeNode(data);
+    } else if (data <= root.data) {
+      TreeNode left = insertRecursively(root.left, data);
+      left.parent = root;
+      root.left = left;
+    } else {
+      TreeNode right = insertRecursively(root.right, data);
+      right.parent = root;
+      root.right = right;
+    }
+    return root;
   }
 
   /**
