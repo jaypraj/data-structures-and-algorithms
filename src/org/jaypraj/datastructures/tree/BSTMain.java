@@ -20,6 +20,7 @@ public class BSTMain {
     tree.postOrderTraverse();
     System.out.println();
 
+    System.out.println(tree.search(-1));
     System.out.println(tree.delete(6));
 
     tree.inOrderTraverse();

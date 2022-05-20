@@ -133,6 +133,10 @@ public class BinarySearchTree {
     return search(this.root, data);
   }
 
+  public TreeNode searchRecursively(int data) {
+    return searchRecursively(this.root, data);
+  }
+
   /**
    * Search node with data in the tree starting with node root
    *
@@ -154,6 +158,17 @@ public class BinarySearchTree {
     }
 
     return null;
+  }
+
+  private TreeNode searchRecursively(TreeNode root, int data) {
+    if (root == null)
+      return null;
+    if (data == root.data)
+      return root;
+    else if (data < root.data)
+      return searchRecursively(root.left, data);
+    else
+      return searchRecursively(root.right, data);
   }
 
   /**
